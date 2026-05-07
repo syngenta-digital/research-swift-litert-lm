@@ -24,6 +24,10 @@ from ._ffi import LiteRtLmInputData
 class Benchmark(interfaces.AbstractBenchmark):
   """Benchmark wrapper for the LiteRT-LM C API."""
 
+  def __init__(self, *args, **kwargs):
+    self.gpu_precision = kwargs.pop("gpu_precision", None)
+    super().__init__(*args, **kwargs)
+
   def run(self) -> interfaces.BenchmarkInfo:
     lib = _get_lib()
     model_path = self.model_path
@@ -40,6 +44,9 @@ class Benchmark(interfaces.AbstractBenchmark):
           "Failed to create engine settings for benchmark"
           f" (model_path={model_path}, backend={backend_str})"
       )
+
+    if self.gpu_precision == "fp32":
+      lib.litert_lm_engine_settings_set_activation_data_type(settings, 0)
 
     lib.litert_lm_engine_settings_enable_benchmark(settings)
 

@@ -45,6 +45,7 @@ def run_benchmark(
     max_num_tokens: int | None = None,
     cache: str | None = None,
     cpu_thread_count: int | None = None,
+    gpu_precision: str | None = None,
 ) -> None:
   """Benchmarks the model."""
   if not model_obj.exists():
@@ -83,6 +84,7 @@ def run_benchmark(
           cache_dir=cache_dir_val,
           enable_speculative_decoding=enable_speculative_decoding,
           max_num_tokens=max_num_tokens,
+          gpu_precision=gpu_precision,
       )
 
     click.echo(
@@ -178,6 +180,7 @@ def benchmark(
     max_num_tokens: int | None = None,
     cache: str | None = None,
     cpu_thread_count: int | None = None,
+    gpu_precision: str | None = None,
 ) -> None:
   """Benchmarks a LiteRT-LM model.
 
@@ -231,6 +234,7 @@ def benchmark(
       max_num_tokens=max_num_tokens,
       cache=cache,
       cpu_thread_count=cpu_thread_count,
+      gpu_precision=gpu_precision,
   )
 
 

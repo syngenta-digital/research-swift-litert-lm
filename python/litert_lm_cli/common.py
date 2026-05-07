@@ -137,6 +137,15 @@ def common_inference_options(f):
           " when the main 'backend' is 'cpu'."
       ),
   )(f)
+  f = click.option(
+      "--gpu-precision",
+      type=click.Choice(["auto", "fp32"], case_sensitive=False),
+      default=None,
+      help=(
+          "The GPU precision to use for inference. If not set, use the default"
+          " from the engine."
+      ),
+  )(f)
   return f
 
 

@@ -68,6 +68,7 @@ class Engine(interfaces.AbstractEngine):
     backend = _normalize_backend(backend)
     vision_backend = _normalize_backend(vision_backend)
     audio_backend = _normalize_backend(audio_backend)
+    gpu_precision = kwargs.pop("gpu_precision", None)
 
     super().__init__(
         model_path=model_path,
@@ -132,6 +133,8 @@ class Engine(interfaces.AbstractEngine):
       self._lib.litert_lm_engine_settings_set_enable_speculative_decoding(
           settings, self.enable_speculative_decoding
       )
+    if gpu_precision == "fp32":
+      self._lib.litert_lm_engine_settings_set_activation_data_type(settings, 0)
     lora_rank = (
         self.lora_rank_config.lora_rank if self.lora_rank_config else None
     )

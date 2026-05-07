@@ -176,6 +176,64 @@ class MainTest(absltest.TestCase):
       self.assertEqual(kwargs["temperature"], 0.8)
       self.assertEqual(kwargs["seed"], 42)
 
+  @unittest.mock.patch(
+      "litert_lm_cli.model.Model.from_model_reference"
+  )
+  @unittest.mock.patch(
+      "litert_lm_cli.commands.run.run_interactive"
+  )
+  def test_run_gpu_precision_flag(
+      self, mock_run_interactive, mock_from_model_ref
+  ):
+    mock_model = unittest.mock.MagicMock()
+    mock_from_model_ref.return_value = mock_model
+    mock_model.exists.return_value = True
+
+    runner = CliRunner()
+    result = runner.invoke(
+        main.cli,
+        [
+            "run",
+            "my-model",
+            "--prompt",
+            "hi",
+            "--gpu-precision=fp32",
+        ],
+    )
+
+    self.assertEqual(result.exit_code, 0)
+    mock_run_interactive.assert_called_once()
+    kwargs = mock_run_interactive.call_args.kwargs
+    self.assertEqual(kwargs["gpu_precision"], "fp32")
+
+  @unittest.mock.patch(
+      "litert_lm_cli.model.Model.from_model_reference"
+  )
+  @unittest.mock.patch(
+      "litert_lm_cli.commands.benchmark.run_benchmark"
+  )
+  def test_benchmark_gpu_precision_flag(
+      self, mock_run_benchmark, mock_from_model_ref
+  ):
+    mock_model = unittest.mock.MagicMock()
+    mock_from_model_ref.return_value = mock_model
+    mock_model.exists.return_value = True
+
+    runner = CliRunner()
+    result = runner.invoke(
+        main.cli,
+        [
+            "benchmark",
+            "my-model",
+            "--gpu-precision=fp32",
+        ],
+    )
+
+    self.assertEqual(result.exit_code, 0)
+    mock_run_benchmark.assert_called_once()
+    kwargs = mock_run_benchmark.call_args.kwargs
+    self.assertEqual(kwargs["gpu_precision"], "fp32")
+
   def test_run_no_template_flag(self):
     runner = CliRunner()
     # Test that --no-template is a valid option for the run command.

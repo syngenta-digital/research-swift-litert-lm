@@ -698,8 +698,20 @@ int litert_lm_engine_settings_set_supported_audio_lora_ranks(
 void litert_lm_engine_settings_set_activation_data_type(
     LiteRtLmEngineSettings* settings, int activation_data_type_int) {
   if (settings && settings->settings) {
+    auto dt =
+        static_cast<litert::lm::ActivationDataType>(activation_data_type_int);
     settings->settings->GetMutableMainExecutorSettings().SetActivationDataType(
-        static_cast<litert::lm::ActivationDataType>(activation_data_type_int));
+        dt);
+    if (dt == litert::lm::ActivationDataType::FLOAT32) {
+      if (settings->settings->GetVisionExecutorSettings().has_value()) {
+        settings->settings->GetMutableVisionExecutorSettings()
+            ->SetActivationDataType(dt);
+      }
+      if (settings->settings->GetAudioExecutorSettings().has_value()) {
+        settings->settings->GetMutableAudioExecutorSettings()
+            ->SetActivationDataType(dt);
+      }
+    }
   }
 }
 

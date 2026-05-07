@@ -387,6 +387,10 @@ void litert_lm_engine_settings_set_litert_dispatch_lib_dir(
 
 // Sets the activation data type.
 //
+// When using the GPU backend, this setting has the following effects:
+// - It forces the GPU inference precision to FP32.
+// - It ensures weights are loaded or converted to FP32.
+//
 // @param settings The engine settings.
 // @param activation_data_type_int The activation data type. See
 // `ActivationDataType` in executor_settings_base.h for the possible values
