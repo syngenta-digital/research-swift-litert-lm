@@ -24,7 +24,6 @@
 #include "absl/status/statusor.h"  // from @com_google_absl
 #include "absl/strings/string_view.h"  // from @com_google_absl
 #include "absl/time/time.h"  // from @com_google_absl
-#include "runtime/components/tokenizer.h"
 #include "runtime/engine/engine_settings.h"
 #include "runtime/engine/io_types.h"
 

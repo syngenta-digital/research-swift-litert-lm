@@ -32,7 +32,7 @@
 #include "absl/strings/string_view.h"  // from @com_google_absl
 #include "absl/synchronization/mutex.h"  // from @com_google_absl
 #include "absl/time/time.h"  // from @com_google_absl
-#include "runtime/components/tokenizer.h"
+#include "support/tokenizer/tokenizer.h"  // from @litert
 #include "runtime/engine/engine.h"
 #include "runtime/engine/engine_settings.h"
 #include "runtime/engine/io_types.h"

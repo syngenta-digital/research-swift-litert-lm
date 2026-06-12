@@ -32,10 +32,10 @@
 #include "absl/strings/string_view.h"  // from @com_google_absl
 #include "absl/time/time.h"  // from @com_google_absl
 #include "litert/cc/litert_environment.h"  // from @litert
+#include "support/tokenizer/tokenizer.h"  // from @litert
 #include "runtime/components/logits_processor/constrained_decoding/constraint.h"
 #include "runtime/components/model_resources.h"
 #include "runtime/components/sampler.h"
-#include "runtime/components/tokenizer.h"
 #include "runtime/engine/io_types.h"
 #include "runtime/executor/audio_executor.h"
 #include "runtime/executor/audio_executor_settings.h"

@@ -28,16 +28,18 @@
 #include "absl/status/statusor.h"  // from @com_google_absl
 #include "absl/strings/string_view.h"  // from @com_google_absl
 #include "litert/cc/litert_tensor_buffer.h"  // from @litert
+#include "support/tokenizer/tokenizer.h"  // from @litert
 #include "runtime/components/logits_processor/constrained_decoding/constraint.h"
 #include "runtime/components/sampler.h"
 #include "runtime/components/stop_token_detector.h"
-#include "runtime/components/tokenizer.h"
 #include "runtime/engine/io_types.h"
 #include "runtime/executor/llm_executor.h"
 #include "runtime/executor/llm_executor_io_types.h"
 #include "runtime/proto/sampler_params.pb.h"
 
 namespace litert::lm {
+
+using Tokenizer = ::litert::support::Tokenizer;
 
 // Runs the pipeline to prefill the input prompt.
 // - executor: The executor that calls the core LLM model.

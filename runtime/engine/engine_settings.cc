@@ -31,7 +31,6 @@
 #include "absl/strings/str_split.h"  // from @com_google_absl
 #include "absl/strings/string_view.h"  // from @com_google_absl
 #include "runtime/components/model_resources.h"
-#include "runtime/components/tokenizer.h"
 #include "runtime/executor/audio_executor_settings.h"
 #include "runtime/executor/executor_settings_base.h"
 #include "runtime/executor/llm_executor_settings.h"

@@ -34,7 +34,6 @@
 #include "absl/strings/str_cat.h"  // from @com_google_absl
 #include "absl/strings/string_view.h"  // from @com_google_absl
 #include "absl/synchronization/mutex.h"  // from @com_google_absl
-#include "runtime/components/tokenizer.h"
 #include "runtime/core/session_utils.h"
 #include "runtime/engine/engine.h"
 #include "runtime/engine/engine_settings.h"
