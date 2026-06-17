@@ -52,6 +52,9 @@ enum class Backend {
 
   // NPU backend.
   NPU,
+
+  // Gemma 3 optimized ML Drift backend
+  GEMMA3_ML_DRIFT,
 };
 std::ostream& operator<<(std::ostream& os, const Backend& backend);
 // Returns the backend enum from the string. Case-insensitive.
