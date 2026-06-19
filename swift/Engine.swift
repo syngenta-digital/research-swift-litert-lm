@@ -200,6 +200,16 @@ public actor Engine {
     return Conversation(handle: conversationHandle, toolManager: toolManager)
   }
 
+  /// Releases the native engine. Safe to call more than once. Runs on the
+  /// engine's actor, so it is serialized with in-flight engine operations and
+  /// avoids the use-after-free that ARC `deinit` can hit on an arbitrary thread.
+  public func close() {
+    if let handle = handle {
+      litert_lm_engine_delete(handle)
+      self.handle = nil
+    }
+  }
+
   deinit {
     if let handle = handle {
       litert_lm_engine_delete(handle)
